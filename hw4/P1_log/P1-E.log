@@ -1,0 +1,92 @@
+qsyn v0.6.2 - Copyright © 2022-2023, DVLab NTUEE.
+Licensed under Apache 2.0 License.
+qsyn> qcir read benchmark/SABRE/small/4gt13_92.qasm
+
+qsyn> qcir print --stat
+QCir (5 qubits, 66 gates)
+Clifford    : 38
+└── 2-qubit : 30
+T-family    : 28
+Others      : 0
+Depth       : 64
+
+qsyn> qc2zx
+
+qsyn> zx print --stat
+Graph (5 inputs, 5 outputs, 106 vertices, 131 edges)
+#T-gate:                      28
+#Non-(Clifford+T)-gate:       0
+#Non-Clifford-gate:           28
+
+qsyn> zx copy
+
+qsyn> zx optimize --full
+
+qsyn> zx print --stat
+Graph (5 inputs, 5 outputs, 42 vertices, 67 edges)
+#T-gate:                      16
+#Non-(Clifford+T)-gate:       0
+#Non-Clifford-gate:           16
+
+qsyn> zx2qc
+
+qsyn> qcir print --stat
+QCir (5 qubits, 92 gates)
+Clifford    : 114
+└── 2-qubit : 40
+T-family    : 16
+Others      : 0
+Depth       : 104
+
+qsyn> qcir optimize
+
+qsyn> qcir print --stat
+QCir (5 qubits, 52 gates)
+Clifford    : 48
+└── 2-qubit : 30
+T-family    : 16
+Others      : 0
+Depth       : 70
+
+qsyn> 
+qsyn> device read benchmark/topology/casablanca.layout
+
+qsyn> duostra -c --m
+Routing...
+Checking...
+Duostra Result: 
+
+Scheduler:      search
+Router:         duostra
+Placer:         dfs
+
+Mapping Depth:  156
+Total Time:     196
+#SWAP:          19
+
+
+qsyn> qcir print --stat
+QCir (7 qubits, 109 gates)
+Clifford    : 105
+└── 2-qubit : 87
+T-family    : 16
+Others      : 0
+Depth       : 156
+
+qsyn> // qcir write /home/arttr1521/git/QDA_final/hw4/P1_log/D_before.qasm
+qsyn> qcir optimize -p
+
+qsyn> qcir write /home/arttr1521/git/QDA_final/hw4/P1_log/E.qasm
+
+qsyn> qcir print --stat
+QCir (7 qubits, 102 gates)
+Clifford    : 96
+└── 2-qubit : 75
+T-family    : 16
+Others      : 0
+Depth       : 143
+
+qsyn> 
+qsyn> 
+qsyn> quit -f
+
