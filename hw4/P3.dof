@@ -1,0 +1,8 @@
+//!ARGS circuit
+
+qcir read ${circuit}
+qc2zx
+zxopt -full
+zxp
+
+q -f
