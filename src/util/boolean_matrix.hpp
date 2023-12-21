@@ -45,6 +45,8 @@ public:
         Row& operator+=(Row const& rhs);
         friend Row operator+(Row lhs, Row const& rhs);
 
+        bool operator==(Row const& rhs) const;
+
         unsigned char& operator[](size_t const& i) {
             return _row[i];
         }
@@ -68,6 +70,7 @@ public:
     std::vector<Row> const& get_matrix() { return _matrix; }
     std::vector<RowOperation> const& get_row_operations() { return _row_operations; }
     Row const& get_row(size_t r) { return _matrix[r]; }
+    std::optional<size_t> find_row(Row);
 
     size_t num_rows() const { return _matrix.size(); }
     size_t num_cols() const { return _matrix[0].size(); }
@@ -93,6 +96,7 @@ public:
     void push_zeros_row() { _matrix.emplace_back(std::vector<unsigned char>(_matrix[0].size(), 0)); }
     void push_row(Row const& row) { _matrix.emplace_back(row); }
     void push_wor(Row&& row) { _matrix.emplace_back(std::move(row)); }
+    void erase_row(size_t r) { (_matrix.erase(_matrix.begin() + r)); };
 
     Row& operator[](size_t const& i) {
         return _matrix[i];
