@@ -40,6 +40,13 @@ public:
     void remove_coeff_0_monomial();
     // qcir::QCir* resynthesis(Polynomial*){};
 
+    // get function
+    dvlab::BooleanMatrix get_pp_terms(){return _pp_terms;};
+    dvlab::BooleanMatrix get_wires(){return _wires;};
+    std::vector<dvlab::Phase> get_pp_coeff(){return _pp_coeff;};
+    size_t get_data_qubit_num(){return _qubit_number;};
+;
+    // print function
     void print_polynomial(spdlog::level::level_enum lvl = spdlog::level::level_enum::off) const;
     void print_wires(spdlog::level::level_enum lvl = spdlog::level::level_enum::off) const;
 

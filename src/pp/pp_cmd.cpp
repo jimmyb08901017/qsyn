@@ -12,6 +12,7 @@
 #include "argparse/argument.hpp"
 #include "cli/cli.hpp"
 #include "pp.hpp"
+#include "matroid.hpp"
 #include "qcir/qcir.hpp"
 #include "qcir/qcir_cmd.hpp"
 #include "qcir/qcir_mgr.hpp"
@@ -53,8 +54,10 @@ dvlab::Command phase_polynomial_cmd(QCirMgr& qcir_mgr) {
                 Phase_Polynomial pp;
                 pp.calculate_pp(*qcir_mgr.get());
 
-                pp.print_wires(spdlog::level::level_enum::off);
-                pp.print_polynomial(spdlog::level::level_enum::off);
+                // pp.print_wires(spdlog::level::level_enum::off);
+                // pp.print_polynomial(spdlog::level::level_enum::off);
+
+                Matroid matroid(pp.get_pp_terms(), pp.get_data_qubit_num(), 0);
 
                 return CmdExecResult::done;
             }};
