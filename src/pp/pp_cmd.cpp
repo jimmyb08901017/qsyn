@@ -58,6 +58,7 @@ dvlab::Command phase_polynomial_cmd(QCirMgr& qcir_mgr) {
                 pp.print_polynomial(spdlog::level::level_enum::off);
 
                 Partitioning partitioning(pp.get_pp_terms(), pp.get_data_qubit_num(), 0);
+                partitioning.matroid_partitioning(pp.get_h_map());
                 // Partitions partitions = partitioning.greedy_partitioning(pp.get_h_map(), pp.get_data_qubit_num());
 
                 // for_each(partitions.begin(), partitions.end(), [&](Partition p){
